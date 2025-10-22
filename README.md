@@ -15,14 +15,19 @@
 Оба порта можно поправить в .env (STORE_MESSAGE_SERVICE_PORT и POSTGRES_EXTERNAL_PORT).
 
 # Запуск
+
+```
 docker-compose -p ibelan-iot up -d --remove-orphans
 cd storetextmod
 gradle runClient
+```
 
 Далее после создания игры в самой игре нужно ввести команду /store-message
 
 # Остановка сервиса хранения сообщений
+```
 docker-compose -p ibelan_iot down
+```
 
 # Зачистка
 Докер оставит после себя 2 volume'а: для собранного сервиса и для постгрес, а также 3 image'а. У них будет префикс ibelan_iot.
