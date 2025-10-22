@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "storetextmod",
+	"version": "${version}",
+	"name": "StoreTextMod",
+	"description": "Mod for input, send and store messages on server",
+	"authors": [
+		"Igor Belan"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/storetextmod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"ru.ibelan.StoreTextMod"
+		],
+		"client": [
+			"ru.ibelan.StoreTextModClient"
+		]
+	},
+	"mixins": [
+		"storetextmod.mixins.json",
+		{
+			"config": "storetextmod.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.17.3",
+		"minecraft": "~1.21.8",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
