@@ -1,5 +1,3 @@
-version: '3.8'
-
 volumes:
   postgres_volume:
   store_message_service_build_volume:
