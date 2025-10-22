@@ -1,0 +1,48 @@
+version: '3.8'
+
+volumes:
+  postgres_volume:
+  store_message_service_build_volume:
+
+services:
+  store_message_service_build:
+    build: store-message-service/
+    volumes:
+      - store_message_service_build_volume:/usr/app/backend/build/libs/
+    depends_on:
+      - postgres
+    networks:
+      - default_network
+
+  store_message_service:
+    image: openjdk:21-jdk-slim
+    command: ["java", "-jar", "/app/store-message-service.jar"]
+    volumes:
+      - store_message_service_build_volume:/app
+    environment:
+      - POSTGRES_DB_HOST=postgres
+      - POSTGRES_DB_PORT=5432
+    depends_on:
+      - postgres
+      - store_message_service_build
+    ports:
+      - ${STORE_MESSAGE_SERVICE_PORT}:8080
+    networks:
+      - default_network
+
+  postgres:
+    image: postgres:${POSTGRES_VERSION}
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=message_store
+      - POSTGRES_USER=minecraft_server
+      - POSTGRES_PASSWORD=minecraft_server
+    ports:
+      - ${POSTGRES_EXTERNAL_PORT}:5432
+    networks:
+      - default_network
+
+networks:
+  default_network:
+    name: network
