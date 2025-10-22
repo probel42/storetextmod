@@ -85,21 +85,11 @@ public class StoreMessageScreen extends Screen {
 	}
 
 	private void onSend() {
-//		sendButton.active = false;
-//		textField.active = false;
-//		sendButton.setMessage(Text.of("Sending..."));
-
 		String message = textField.getText();
 		if (message != null && !message.isEmpty()) {
 			sendHandler.accept(message);
 			showNotifier();
 		}
 		textField.setText("");
-//		close();
-
-//		sendButton.setMessage(Text.of("Send"));
-//		sendButton.active = true;
-//		textField.active = false;
-//		textField.setFocused(true);
 	}
 }
